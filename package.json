@@ -13,8 +13,9 @@
   "dependencies": {
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
-    "node-fetch": "^2.6.2",
-    "request": "^2.88.2"
+    "node-fetch": "^2.6.9",
+    "request": "^2.88.2",
+    "uuid": "^9.0.0"
   },
   "engines": {
     "node": ">=14"
