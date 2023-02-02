@@ -1,0 +1,25 @@
+{
+	"log": {
+		"loglevel": "none"
+	},
+	"inbounds": [{
+		"port": 8080,
+		"listen": "127.0.0.1",
+		"protocol": "vless",
+		"settings": {
+			"clients": [{
+				"id": "0e059fce-d6c8-4cc2-9e11-9efff358f8b9"
+			}],
+			"decryption": "none"
+		},
+		"streamSettings": {
+			"network": "ws"
+		}
+
+
+	}],
+	"outbounds": [{
+		"protocol": "freedom",
+		"settings": {}
+	}]
+}
