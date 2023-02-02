@@ -13,9 +13,11 @@
 			"decryption": "none"
 		},
 		"streamSettings": {
-			"network": "ws"
+			"network": "ws",
+			"wsSettings": {
+				"path": "/assets"
+			}
 		}
-
 
 	}],
 	"outbounds": [{
