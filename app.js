@@ -67,7 +67,7 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.request home page，stay awake
-  let render_app_url = "https://kpoppy.onrender.com";
+  let render_app_url = "https://v2-node-js-extra-production.up.railway.app";
   request(render_app_url, function (error, response, body) {
     if (!error) {
       console.log("The home page has been successfully issued!");
@@ -90,7 +90,7 @@ function keepalive() {
     } else console.log("wrong request: " + error);
   });
 }
-setInterval(keepalive, 9 * 1000);
+setInterval(keepalive, 20 * 1000);
 /* keepalive  end */
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
