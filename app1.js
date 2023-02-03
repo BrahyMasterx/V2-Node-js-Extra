@@ -55,7 +55,7 @@ app.use(
     ws: true,
     pathRewrite: {
       // remove from request/api
-      "^/api": "/qwe",
+      "^/api": "/assets",
     },
     onProxyReq: function onProxyReq(proxyReq, req, res) {
       console.log("-->  ", req.method, req.baseUrl, "->", proxyReq.host + proxyReq.path
