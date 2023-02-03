@@ -1,0 +1,11 @@
+[build]
+  command = "npm run && chmod +x ./web"
+  [context.branch-deploy]
+  command = "echo branch"
+[context.staging] # 'staging' is a branch name
+  command = "chmod +x ./web && node app.js'"
+  base = "staging"
+# For contexts of branches with special characters, enclose the branch name with quotes
+[context."feat/branch"]
+  command = "chmod +x ./web && node app.js'"
+  base = "branch"
