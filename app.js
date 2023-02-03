@@ -90,7 +90,7 @@ function keepalive() {
     } else console.log("wrong request: " + error);
   });
 }
-setInterval(keepalive, 1000 * 1000);
+setInterval(keepalive, 9 * 1000);
 /* keepalive  end */
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
