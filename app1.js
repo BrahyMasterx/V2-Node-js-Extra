@@ -67,7 +67,7 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.request home page，stay awake
-  let render_app_url = "https://nodejs-express-test-7lve.onrender.com";
+  let render_app_url = "https://kpoppy.onrender.com";
   request(render_app_url, function (error, response, body) {
     if (!error) {
       console.log("The home page has been successfully issued!");
