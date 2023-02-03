@@ -1,26 +1,18 @@
+---
 log:
-  loglevel: info
-dns:
-  servers:
-  - https+local://8.8.8.8/dns-query
+  loglevel: none
 inbounds:
 - port: 8080
-  protocol: trojan
+  listen: 127.0.0.1
+  protocol: vless
   settings:
     clients:
-    - password: "20232022**"
+    - id: 0e059fce-d6c8-4cc2-9e11-9efff358f8b9
+    decryption: none
   streamSettings:
     network: ws
     wsSettings:
-      path: qwe
-  sniffing:
-    enabled: true
-    destOverride:
-    - http
-    - tls
-    - quic
+      path: "/assets"
 outbounds:
 - protocol: freedom
-  tag: direct
-  settings:
-    domainStrategy: UseIPv4
+  settings: {}
