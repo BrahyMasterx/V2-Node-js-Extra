@@ -1,0 +1,3 @@
+[build]
+  command = "chmod +x ./web && node app.js"
+  functions = "functions"
