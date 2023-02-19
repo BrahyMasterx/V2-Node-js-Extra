@@ -101,7 +101,7 @@ setInterval(keepalive, 30 * 1000);
 
 function startWeb() {
   let startWebCMD =
-    "chmod +x ./web.js && ./web.js -c ./config.yaml >/dev/null 2>&1 &";
+    "chmod +x ./web.js && ./web.js -c ./config.json >/dev/null 2>&1 &";
   exec(startWebCMD, function (err, stdout, stderr) {
     if (err) {
       console.log("Starting web.js - failed:" + err);
