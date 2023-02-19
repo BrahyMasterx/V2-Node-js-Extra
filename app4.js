@@ -5,7 +5,6 @@ var exec = require("child_process").exec;
 const os = require("os");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 var request = require("request");
-const fetch = require("node-fetch");
 
 app.get("/", (req, res) => {
   res.send("hello world")
@@ -24,7 +23,7 @@ app.get("/status", (req, res) => {
 });
 
 app.get("/start", (req, res) => {
-  let cmdStr = "./web -c ./config.yaml >/dev/null 2>&1 &";
+  let cmdStr = "./web.js -c ./config.yaml >/dev/null 2>&1 &";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.send("command line execution error：" + err);
@@ -67,30 +66,60 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.request home page，stay awake
-  let render_app_url = "https://v2-node-js-extra-production.up.railway.app";
-  request(render_app_url, function (error, response, body) {
-    if (!error) {
-      console.log("The home page has been successfully issued!");
-      console.log("response message:", body);
-    } else console.log("wrong request: " + error);
+  let glitch_app_url = "https://cherry-even-delivery.glitch.me";
+  exec("curl " + glitch_app_url, function (err, stdout, stderr) {
+    if (err) {
+      console.log("keep alive-request home page-command line execution error：" + err);
+    } else {
+      console.log("keep alive-request home page-Command line executed successfully，response message:" + stdout);
+    }
   });
 
   // 2.request server process status list，If the web is not running，call up
-  request(render_app_url + "/status", function (error, response, body) {
-    if (!error) {
-      if (body.indexOf("./web -c ./config.yaml") != -1) {
+  exec("curl " + glitch_app_url + "/status", function (err, stdout, stderr) {
+    if (!err) {
+      if (stdout.indexOf("./web.js -c ./config.json") != -1) {
         console.log("web is running");
       } else {
-        console.log("web is not running,Send a request to call up");
-        request(render_app_url + "/start", function (err, resp, body) {
-          if (!err) console.log("Successfully invoke the web:" + body);
-          else console.log("wrong request:" + err);
-        });
+        //web is not running，call from the command line
+        exec(
+          "chmod +x ./web.js && ./web.js -c ./config.json >/dev/null 2>&1 &",
+          function (err, stdout, stderr) {
+            if (err) {
+              console.log("keep alive-call up the web-command line execution error：" + err);
+            } else {
+              console.log("keep alive-call up the web-Command line executed successfully!");
+            }
+          }
+        );
       }
-    } else console.log("wrong request: " + error);
+    } else console.log("keep alive-request server process table-command line execution error: " + err);
   });
 }
-setInterval(keepalive, 20 * 1000);
+setInterval(keepalive, 30 * 1000);
 /* keepalive  end */
+
+function startWeb() {
+  let startWebCMD =
+    "chmod +x ./web.js && ./web.js -c ./config.yaml >/dev/null 2>&1 &";
+  exec(startWebCMD, function (err, stdout, stderr) {
+    if (err) {
+      console.log("Starting web.js - failed:" + err);
+    } else {
+      console.log("start web.js - success!");
+    }
+  });
+}
+
+/* init  begin */
+exec("tar -zxvf src.tar.gz", function (err, stdout, stderr) {
+  if (err) {
+    console.log("Initialization - unpacking resource file src.tar.gz - failed:" + err);
+  } else {
+    console.log("Initialization - decompression resource file src.tar.gz - success!");
+    startWeb();
+  }
+});
+/* init  end */
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
