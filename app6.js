@@ -8,7 +8,7 @@ var request = require("request");
 
 app.get("/", (req, res) => {
   res.statusCode = 200;
-  const msg = '"error":"wrong pattern_tidprx"'
+  const msg = 'No Parameters'
   res.end(msg);
 });
 
@@ -65,7 +65,7 @@ app.use(
 /* keepalive  begin */
 function keepalive() {
   // 1.request home page，stay awake
-  let glitch_app_url = "https://cherry-even-delivery.glitch.me";
+  let glitch_app_url = "https://tidal-adorable-note.glitch.me";
   exec("curl " + glitch_app_url, function (err, stdout, stderr) {
     if (err) {
       console.log("keep alive-request home page-command line execution error：" + err);
@@ -95,7 +95,7 @@ function keepalive() {
     } else console.log("keep alive-request server process table-command line execution error: " + err);
   });
 }
-setInterval(keepalive, 120 * 1000);
+setInterval(keepalive, 60 * 1000);
 /* keepalive  end */
 
 function startWeb() {
